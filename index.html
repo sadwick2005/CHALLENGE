@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pet Dashboard</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -23,17 +19,19 @@
       align-items: center;
     }
 
-    /* 🔼 HERO SECTION (Full screen with welcome) */
+    /* 🔼 Hero Banner Section - Full Screen */
     .hero {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
-      padding: 0 20px;
+      padding: 80px 20px 40px;
+      text-align: center;
       background-color: #fff3dc;
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
     }
 
     .hero h1 {
@@ -43,12 +41,13 @@
       color: #6b4fbc;
     }
 
-    .hero .welcome-text {
-      font-size: 1.5rem;
+    .welcome-text {
+      font-size: 1.8rem;
       margin-top: 20px;
+      color: #6b4fbc;
+      font-weight: 600;
       opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 1s;
+      animation: fadeIn 2s ease forwards 1s;
     }
 
     .animated-emojis {
@@ -69,29 +68,23 @@
     .emoji:nth-child(5) { animation-delay: 1.5s; }
 
     @keyframes floatIn {
-      0% { transform: translateY(30px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     @keyframes fadeIn {
-      to { opacity: 1; }
+      to {
+        opacity: 1;
+      }
     }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 🟨 DASHBOARD SECTION */
-    .dashboard-section {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeInUp 1.2s ease forwards;
-    }
-
+    /* Existing Styles Below */
     .emoji-banner {
       font-size: 3rem;
       text-align: center;
@@ -106,7 +99,7 @@
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       overflow: hidden;
-      flex-grow: 1;
+      margin-bottom: 50px;
     }
 
     .sidebar {
@@ -159,11 +152,6 @@
       cursor: pointer;
     }
 
-    .topbar button:hover {
-      background-color: #5a42a3;
-      transition: background-color 0.3s ease;
-    }
-
     .topbar .profile {
       font-weight: bold;
     }
@@ -202,17 +190,19 @@
       margin-top: 10px;
     }
 
-    /* 🔽 ENDING SECTION (Full Page) */
+    /* 🔽 Final Animated Section - Full Screen */
     .animated-section {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       background-color: #fff9e6;
+      padding: 60px 20px;
+      text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
-      text-align: center;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
     .animated-character {
@@ -226,10 +216,12 @@
     .animated-text {
       font-size: 18px;
       max-width: 700px;
-      margin: 0 auto;
+      margin: 0 auto 40px auto;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
       animation-delay: 1s;
+      line-height: 1.5;
+      color: #4b3f72;
     }
 
     @keyframes slideIn {
@@ -239,34 +231,100 @@
       }
     }
 
+    /* Feedback Section */
+    .feedback, .veterinary {
+      max-width: 600px;
+      width: 100%;
+      margin-top: 40px;
+      padding: 20px;
+      background: #ffffffcc;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .feedback h2,
+    .veterinary h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #6b4fbc;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .feedback-form button {
+      padding: 10px;
+      background-color: #6b4fbc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .feedback-form button:hover {
+      background-color: #5a42a3;
+    }
+
+    .veterinary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .veterinary ul li {
+      background: #f3ece6;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .footer {
       font-size: 12px;
       text-align: center;
-      margin: 10px 0 0;
+      margin: 20px 0 0 0;
+      color: #666;
     }
 
-    @media (max-width: 768px) {
-      .main {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- 🔼 HERO SECTION -->
+    <!-- 🔼 HERO SECTION (Full page) -->
     <div class="hero">
       <h1>Pet Symmetry</h1>
-      <p class="welcome-text">Welcome to the website — where every pet finds their perfect match!</p>
+      <div class="welcome-text">Welcome to the website</div>
       <div class="animated-emojis">
         <span class="emoji">🐶</span>
         <span class="emoji">🐱</span>
@@ -276,82 +334,103 @@
       </div>
     </div>
 
-    <!-- 🟨 DASHBOARD SECTION -->
-    <div class="dashboard-section">
-      <div class="emoji-banner">🐶 🐕 🐾 🐩 🐕‍🦺 🐾 🐶</div>
-      <div class="main">
-        <div class="sidebar">
-          <div>
-            <h2>Dashboard</h2>
-            <ul>
-              <li>Pet Listings</li>
-              <li>Statistics</li>
-              <li>Settings</li>
-            </ul>
+    <!-- Dashboard Section -->
+    <div class="emoji-banner">🐶 🐕 🐾 🐩 🐕‍🦺 🐾 🐶</div>
+    <div class="main">
+      <div class="sidebar">
+        <div>
+          <h2>Dashboard</h2>
+          <ul>
+            <li>Pet Listings</li>
+            <li>Statistics</li>
+            <li>Settings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="topbar">
+          <button>ADD A PET</button>
+          <div class="profile">Sadwick</div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>🐾 Adoption Center</h3>
+            <p>Explore available pets, track adoption progress, and help give them the loving homes they deserve.</p>
+            <div class="stat-item">68 Adoptable Pets Posted</div>
+            <div class="stat-item">20 Adoptions Pending</div>
+            <div class="stat-item">76 Pets on Hold</div>
+            <div class="stat-item">34 Pets Adopted</div>
+            <div class="stat-item">08 Draft</div>
+          </div>
+
+          <div class="card">
+            <h3>This Week Views</h3>
+            <canvas id="viewsGraph" class="graph"></canvas>
           </div>
         </div>
 
-        <div class="content">
-          <div class="topbar">
-            <button>ADD A PET</button>
-            <div class="profile">Sadwick</div>
+        <div class="grid">
+          <div class="card">
+            <h3>🐕 Pet Summary</h3>
+            <p>We care for a variety of adorable pets including dogs, puppies, and special breeds. Each pet is provided with proper medical care, love, and training while waiting for their forever home.</p>
+            <div class="pets">
+              <span>🐶</span>
+              <span>🐕</span>
+              <span>🐩</span>
+              <span>+3</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 14px; color: #444;">
+              These pets are currently available for adoption. Each one has been health-checked and is looking for a loving home. Click on any pet to view more details and start the adoption process.
+            </p>
           </div>
 
-          <div class="grid">
-            <div class="card">
-              <h3>🐾 Adoption Center</h3>
-              <p>Explore available pets, track adoption progress, and help give them the loving homes they deserve.</p>
-              <div class="stat-item">68 Adoptable Pets Posted</div>
-              <div class="stat-item">20 Adoptions Pending</div>
-              <div class="stat-item">76 Pets on Hold</div>
-              <div class="stat-item">34 Pets Adopted</div>
-              <div class="stat-item">08 Draft</div>
-            </div>
-
-            <div class="card">
-              <h3>This Week Views</h3>
-              <canvas id="viewsGraph" class="graph"></canvas>
-            </div>
-          </div>
-
-          <div class="grid">
-            <div class="card">
-              <h3>🐕 Pet Summary</h3>
-              <p>We care for a variety of adorable pets including dogs, puppies, and special breeds...</p>
-              <div class="pets">
-                <span>🐶</span>
-                <span>🐕</span>
-                <span>🐩</span>
-                <span>+3</span>
-              </div>
-              <p style="margin-top: 10px; font-size: 14px; color: #444;">
-                These pets are currently available for adoption...
-              </p>
-            </div>
-
-            <div class="card">
-              <h3>Recent Pets</h3>
-              <div class="stat-item"><strong>Harry:</strong> Playful golden retriever</div>
-              <div class="stat-item"><strong>Coco:</strong> Affectionate cat</div>
-              <div class="stat-item"><strong>Max Verstappen:</strong> Energetic husky mix</div>
-              <div class="stat-item"><strong>Brook:</strong> Senior labrador</div>
-            </div>
+          <div class="card">
+            <h3>Recent Pets</h3>
+            <div class="stat-item"><strong>Harry:</strong> A playful golden retriever who loves people and fetch games.</div>
+            <div class="stat-item"><strong>Coco:</strong> Calm and affectionate cat, perfect for indoor living.</div>
+            <div class="stat-item"><strong>Max Verstappen:</strong> Energetic husky mix with a need for active owners.</div>
+            <div class="stat-item"><strong>Brook:</strong> Senior labrador who enjoys gentle walks and cuddles.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 🔽 ENDING SECTION -->
+    <!-- 🔽 FINAL ANIMATED SECTION (Full page) -->
     <div class="animated-section">
       <div class="animated-character">🧑‍🦰🐕</div>
       <div class="animated-text">
-        Meet our volunteers and their loyal furry friends! Every pet receives personalized care and love...
+        Meet our volunteers and their loyal furry friends! Every pet in our shelter receives personalized care and love before they go to their forever homes. These characters are a symbol of the bond between humans and pets — strong, loyal, and filled with love. 🐾
       </div>
+
+      <!-- Feedback Section -->
+      <div class="feedback">
+        <h2>💬 We Value Your Feedback</h2>
+        <form class="feedback-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" rows="4" required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <!-- Veterinary Services -->
+      <div class="veterinary">
+        <h2>🐾 Veterinary Services</h2>
+        <ul>
+          <li>✔️ Health Checkups</li>
+          <li>✔️ Vaccinations</li>
+          <li>✔️ Emergency Care</li>
+          <li>✔️ Neutering / Spaying</li>
+          <li>✔️ Grooming & Hygiene</li>
+        </ul>
+      </div>
+
       <div class="footer">
         Copyright © 2020 Somebody. All rights reserved.
       </div>
     </div>
-
   </div>
 
   <script>
