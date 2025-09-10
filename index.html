@@ -23,19 +23,17 @@
       align-items: center;
     }
 
-    /* 🔼 Hero Banner Section (now full-page) */
+    /* 🔼 HERO SECTION (Full screen with welcome) */
     .hero {
       width: 100%;
-      height: 100vh; /* Full viewport height */
+      height: 100vh;
       padding: 0 20px;
-      text-align: center;
       background-color: #fff3dc;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
-      overflow: hidden;
+      text-align: center;
     }
 
     .hero h1 {
@@ -45,9 +43,17 @@
       color: #6b4fbc;
     }
 
+    .hero .welcome-text {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1s;
+    }
+
     .animated-emojis {
       font-size: 2rem;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .emoji {
@@ -63,14 +69,27 @@
     .emoji:nth-child(5) { animation-delay: 1.5s; }
 
     @keyframes floatIn {
-      0% {
-        transform: translateY(30px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🟨 DASHBOARD SECTION */
+    .dashboard-section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInUp 1.2s ease forwards;
     }
 
     .emoji-banner {
@@ -87,7 +106,7 @@
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       overflow: hidden;
-      margin-bottom: 50px;
+      flex-grow: 1;
     }
 
     .sidebar {
@@ -183,10 +202,10 @@
       margin-top: 10px;
     }
 
-    /* 🔽 Ending Section (now full-page) */
+    /* 🔽 ENDING SECTION (Full Page) */
     .animated-section {
       width: 100%;
-      height: 100vh; /* Full viewport height */
+      height: 100vh;
       background-color: #fff9e6;
       display: flex;
       flex-direction: column;
@@ -220,19 +239,12 @@
       }
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
     .footer {
       font-size: 12px;
       text-align: center;
       margin: 10px 0 0;
     }
 
-    /* 🔁 Responsive Grid */
     @media (max-width: 768px) {
       .main {
         flex-direction: column;
@@ -251,9 +263,10 @@
 <body>
   <div class="container">
 
-    <!-- 🔼 NEW HERO SECTION (Full Page) -->
+    <!-- 🔼 HERO SECTION -->
     <div class="hero">
       <h1>Pet Symmetry</h1>
+      <p class="welcome-text">Welcome to the website — where every pet finds their perfect match!</p>
       <div class="animated-emojis">
         <span class="emoji">🐶</span>
         <span class="emoji">🐱</span>
@@ -263,74 +276,76 @@
       </div>
     </div>
 
-    <!-- Dashboard Section -->
-    <div class="emoji-banner">🐶 🐕 🐾 🐩 🐕‍🦺 🐾 🐶</div>
-    <div class="main">
-      <div class="sidebar">
-        <div>
-          <h2>Dashboard</h2>
-          <ul>
-            <li>Pet Listings</li>
-            <li>Statistics</li>
-            <li>Settings</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="topbar">
-          <button>ADD A PET</button>
-          <div class="profile">Sadwick</div>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <h3>🐾 Adoption Center</h3>
-            <p>Explore available pets, track adoption progress, and help give them the loving homes they deserve.</p>
-            <div class="stat-item">68 Adoptable Pets Posted</div>
-            <div class="stat-item">20 Adoptions Pending</div>
-            <div class="stat-item">76 Pets on Hold</div>
-            <div class="stat-item">34 Pets Adopted</div>
-            <div class="stat-item">08 Draft</div>
-          </div>
-
-          <div class="card">
-            <h3>This Week Views</h3>
-            <canvas id="viewsGraph" class="graph"></canvas>
+    <!-- 🟨 DASHBOARD SECTION -->
+    <div class="dashboard-section">
+      <div class="emoji-banner">🐶 🐕 🐾 🐩 🐕‍🦺 🐾 🐶</div>
+      <div class="main">
+        <div class="sidebar">
+          <div>
+            <h2>Dashboard</h2>
+            <ul>
+              <li>Pet Listings</li>
+              <li>Statistics</li>
+              <li>Settings</li>
+            </ul>
           </div>
         </div>
 
-        <div class="grid">
-          <div class="card">
-            <h3>🐕 Pet Summary</h3>
-            <p>We care for a variety of adorable pets including dogs, puppies, and special breeds. Each pet is provided with proper medical care, love, and training while waiting for their forever home.</p>
-            <div class="pets">
-              <span>🐶</span>
-              <span>🐕</span>
-              <span>🐩</span>
-              <span>+3</span>
+        <div class="content">
+          <div class="topbar">
+            <button>ADD A PET</button>
+            <div class="profile">Sadwick</div>
+          </div>
+
+          <div class="grid">
+            <div class="card">
+              <h3>🐾 Adoption Center</h3>
+              <p>Explore available pets, track adoption progress, and help give them the loving homes they deserve.</p>
+              <div class="stat-item">68 Adoptable Pets Posted</div>
+              <div class="stat-item">20 Adoptions Pending</div>
+              <div class="stat-item">76 Pets on Hold</div>
+              <div class="stat-item">34 Pets Adopted</div>
+              <div class="stat-item">08 Draft</div>
             </div>
-            <p style="margin-top: 10px; font-size: 14px; color: #444;">
-              These pets are currently available for adoption. Each one has been health-checked and is looking for a loving home. Click on any pet to view more details and start the adoption process.
-            </p>
+
+            <div class="card">
+              <h3>This Week Views</h3>
+              <canvas id="viewsGraph" class="graph"></canvas>
+            </div>
           </div>
 
-          <div class="card">
-            <h3>Recent Pets</h3>
-            <div class="stat-item"><strong>Harry:</strong> A playful golden retriever who loves people and fetch games.</div>
-            <div class="stat-item"><strong>Coco:</strong> Calm and affectionate cat, perfect for indoor living.</div>
-            <div class="stat-item"><strong>Max Verstappen:</strong> Energetic husky mix with a need for active owners.</div>
-            <div class="stat-item"><strong>Brook:</strong> Senior labrador who enjoys gentle walks and cuddles.</div>
+          <div class="grid">
+            <div class="card">
+              <h3>🐕 Pet Summary</h3>
+              <p>We care for a variety of adorable pets including dogs, puppies, and special breeds...</p>
+              <div class="pets">
+                <span>🐶</span>
+                <span>🐕</span>
+                <span>🐩</span>
+                <span>+3</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 14px; color: #444;">
+                These pets are currently available for adoption...
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Recent Pets</h3>
+              <div class="stat-item"><strong>Harry:</strong> Playful golden retriever</div>
+              <div class="stat-item"><strong>Coco:</strong> Affectionate cat</div>
+              <div class="stat-item"><strong>Max Verstappen:</strong> Energetic husky mix</div>
+              <div class="stat-item"><strong>Brook:</strong> Senior labrador</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 👇 Animated Full Page Character Section -->
+    <!-- 🔽 ENDING SECTION -->
     <div class="animated-section">
       <div class="animated-character">🧑‍🦰🐕</div>
       <div class="animated-text">
-        Meet our volunteers and their loyal furry friends! Every pet in our shelter receives personalized care and love before they go to their forever homes. These characters are a symbol of the bond between humans and pets — strong, loyal, and filled with love. 🐾
+        Meet our volunteers and their loyal furry friends! Every pet receives personalized care and love...
       </div>
       <div class="footer">
         Copyright © 2020 Somebody. All rights reserved.
