@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3ece6;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .emoji-banner {
+      font-size: 3rem;
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .main {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #f9f1d9;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .sidebar ul li {
+      margin: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .topbar button {
+      padding: 8px 16px;
+      background-color: #6b4fbc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .topbar .profile {
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fbeecb;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .card .stat-item {
+      margin: 5px 0;
+    }
+
+    .card .graph {
+      width: 100%;
+      height: 100px;
+    }
+
+    .card .pets {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      font-size: 12px;
+      text-align: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji-banner">🐶 🐕 🐾 🐩 🐕‍🦺 🐾 🐶</div>
+    <div class="main">
+      <div class="sidebar">
+        <div>
+          <h2>Dashboard</h2>
+          <ul>
+            <li>Pet Listings</li>
+            <li>Statistics</li>
+            <li>Settings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="topbar">
+          <button>ADD A PET</button>
+          <div class="profile">Sadwick</div>
+        </div>
+
+        <div class="grid">
+          <!-- Left card -->
+          <div class="card">
+            <h3>🐾 Adoption Center</h3>
+            <div class="stat-item">68 Adoptable Pets Posted</div>
+            <div class="stat-item">20 Adoptions Pending</div>
+            <div class="stat-item">76 Pets on Hold</div>
+            <div class="stat-item">34 Pets Adopted</div>
+            <div class="stat-item">08 Draft</div>
+          </div>
+
+          <!-- Right card -->
+          <div class="card">
+            <h3>This Week Views</h3>
+            <canvas id="viewsGraph" class="graph"></canvas>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- Lower left card -->
+          <div class="card">
+            <h3>🐕 Pet Summary</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <div class="pets">
+              <span>🐶</span>
+              <span>🐕</span>
+              <span>🐩</span>
+              <span>+3</span>
+            </div>
+          </div>
+
+          <!-- Lower right card -->
+          <div class="card">
+            <h3>Recent Pets</h3>
+            <div class="stat-item"><strong>Harry:</strong> Recently added and available for adoption</div>
+            <div class="stat-item"><strong>Coco:</strong> Pending adoption approval</div>
+            <div class="stat-item"><strong>Max Verstappen:</strong> On hold due to special care needs</div>
+            <div class="stat-item"><strong>Brook:</strong> Successfully adopted!</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      Copyright © 2020 Somebody. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('viewsGraph');
+    const ctx = canvas.getContext('2d');
+
+    function drawLineGraph() {
+      const width = canvas.width = canvas.offsetWidth;
+      const height = canvas.height = canvas.offsetHeight;
+
+      const data = [45, 50, 60, 70, 78, 85, 90];
+      const spacing = width / (data.length - 1);
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.beginPath();
+      ctx.strokeStyle = '#ff9900';
+      ctx.lineWidth = 2;
+
+      data.forEach((point, index) => {
+        const x = spacing * index;
+        const y = height - (point / 100) * height;
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+
+      ctx.stroke();
+    }
+
+    window.addEventListener('load', drawLineGraph);
+    window.addEventListener('resize', drawLineGraph);
+  </script>
+</body>
+</html>
